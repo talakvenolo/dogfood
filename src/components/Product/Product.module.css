@@ -180,6 +180,11 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.favorite:hover {
+    opacity: 0.6;
 }
 
 .favorite svg {

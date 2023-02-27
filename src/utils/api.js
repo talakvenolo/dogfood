@@ -52,7 +52,7 @@ const config = {
     baseUrl: 'https://api.react-learning.ru',
     headers: {
         'Content-Type': 'application/json',
-        Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2VhYTYxZjU5Yjk4YjAzOGY3N2I1ZTMiLCJncm91cCI6ImZyb250MTAiLCJpYXQiOjE2NzY5OTQxODIsImV4cCI6MTcwODUzMDE4Mn0.qhDc1OR9TsQoqnA0InEjGiStTnoSmVaOmVLyytWSxXU'
+        Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2U3NjhjMDU5Yjk4YjAzOGY3N2I1MTIiLCJncm91cCI6ImZyb250MTAiLCJpYXQiOjE2NzYxMTAwNzMsImV4cCI6MTcwNzY0NjA3M30.luanAfhT-QPcFluquX55gosHGNa0vl_x42wo9mBy3h8'
     }
 }
 

@@ -127,6 +127,7 @@
     font-weight: 700;
     line-height: 20px;
     border-radius: 55px;
+    border: 1px solid #7b8e98;
     text-decoration: none;
     display: inline-block;
     transition: background-color .3s;
@@ -139,6 +140,7 @@
     background-color: #FFAA0D;
     color: #F44336;
 }
+
 
 .tag {
     padding: 2px 8px;

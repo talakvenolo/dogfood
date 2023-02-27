@@ -4,13 +4,16 @@
     font-weight: 700;
     line-height: 20px;
     border-radius: 55px;
+    border: 1px solid #7b8e98;
+    color: var(--text-main-color);
     text-decoration: none;
     display: inline-block;
     transition: background-color .3s;
+    cursor: pointer;
 }
 
 .primary {
-    background-color: #FFE44D;
+    background-color: var(--primary-main-color);
 }
 
 .primary:hover {
@@ -19,10 +22,9 @@
 }
 
 .secondary {
-    background-color: #95b0ac;
+    background-color: #FFFFFF;
 }
 
 .secondary:hover {
-    background-color: #FFAA0D;
-    color: #F44336;
+    background-color: #e5e0dc;
 }

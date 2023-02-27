@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Logo from "../../components/Logo/Logo";
 import Search from "../../components/Search/Search";
 import Header from "../../components/Header/Header";
@@ -8,21 +8,28 @@ import Spinner from "../../components/Spiner/Spiner";
 import Footer from "../../components/Footer/Footer";
 import Product from "../../components/Product/Product";
 import s from '../../components/Product/Product.module.css'
+import {useParams} from "react-router-dom";
+import NotFoundPage from "../../pages/ NotFoundPage/NotFoundPage";
+import {UserContext} from "../../context/userContext";
 
 const ProductPage = () => {
     const [product, setProduct] = useState([]);
-    const [currentUser, setCurrentUser] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const { productId } = useParams();
+    const { user: currentUser } = useContext(UserContext);
 
     useEffect(() => {
         setIsLoading(true);
-        Promise.all([api.getUserInfo(), api.getProductById('622c77e877d63f6e70967d22')])
-            .then(([userData, productData]) => {
-                setCurrentUser(userData);
+        api.getProductById(productId)
+            .then(( productData) => {
                 setProduct(productData);
             })
-            .catch(err => console.error(err))
+            .catch(err => {
+                console.error(err)
+                setIsError(true);
+            })
             .finally(() => {
                 setIsLoading(false);
             })
@@ -36,32 +43,22 @@ const ProductPage = () => {
 
     const handleProductLike = () => {
         const liked = isLiked(product.likes, currentUser._id); //ищем в массиве лайков id текущего пользователя.
-        api.changeLikeProduct(product._id, liked).then((newCard) => { // в зависимости от того есть ли лайки или нет отправляем запрос "DELETE" или "PUT"
-            const newCards = product.map((card) => {
-                // console.log('Карточка в переборе', card);
-                // console.log('Карточка с сервера', newCard);
-                return card._id === newCard._id ? newCard : card;
-            })
-            setProduct(newCards);
+        api.changeLikeProduct(product._id, liked).then((updateCard) => { // в зависимости от того есть ли лайки или нет отправляем запрос "DELETE" или "PUT"
+            setProduct(updateCard);
         })
     }
 
   return (
       <>
-        <Header>
-          <Logo className='logo logo_place_header' href='/' />
-          <Search onSubmit={handleRequest} />
-        </Header>
-          <main className='content container'>
-              {isLoading ? (
+          {isLoading ? (
                   <div className={s.wrapperLoader}>
-                    <Spinner />
+                      <Spinner />
                   </div>
               ) : (
-                  <Product {...product} currentUser={currentUser} onProductLike={handleProductLike} />
-                  )}
-          </main>
-          <Footer />
+              !isError && <Product {...product} currentUser={currentUser} onProductLike={handleProductLike} />)}
+          {isError ? (
+              <NotFoundPage />
+          ): null}
       </>
   );
 };
